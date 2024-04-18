@@ -11,7 +11,8 @@ def index():
 @app.route('/weather')
 def get_weather():
     city = request.args.get('city')
-    if bool(city.strip()):
+    if not bool(city.strip()):
+        print("Empty city")
         city = "Dresden"
 
     weather_data = get_current_weather(city)
