@@ -32,6 +32,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: dennyherbrich/weather-app
+          tags: |
+            ${{ github.ref == 'refs/heads/main' && 'latest' }}
      
       - name: Build and push
         uses: docker/build-push-action@v5
