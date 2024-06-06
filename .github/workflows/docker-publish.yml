@@ -34,6 +34,8 @@ jobs:
           images: dennyherbrich/weather-app
           tags: |
             ${{ github.ref == 'refs/heads/main' && 'latest' }}
+            type=ref,event=branch
+            type=ref,event=pr
      
       - name: Build and push
         uses: docker/build-push-action@v5
