@@ -11,7 +11,7 @@ app.wsgi_app = LoggingMiddleware(ProxyFix(app.wsgi_app, x_for=1, x_host=1, x_pre
 @app.route('/')
 @app.route('/index')
 def index():
-    print(request.head)
+
     return render_template('index.html')
 
 @app.route('/health')
