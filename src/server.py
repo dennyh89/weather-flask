@@ -2,14 +2,16 @@ from flask import Flask, render_template, request, make_response, jsonify
 from weather import get_current_weather
 from waitress import serve
 from werkzeug.middleware.proxy_fix import ProxyFix
+from loggingmiddleware import LoggingMiddleware
 
 app = Flask(__name__)
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1, x_prefix=1)
+app.wsgi_app = LoggingMiddleware(ProxyFix(app.wsgi_app, x_for=1, x_host=1, x_prefix=1))
 
 
 @app.route('/')
 @app.route('/index')
 def index():
+    print(request.head)
     return render_template('index.html')
 
 @app.route('/health')
@@ -39,4 +41,8 @@ def get_weather():
     )
 
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0", port=8000)
+    # serve(app, host="0.0.0.0", port=8000)
+
+
+
