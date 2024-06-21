@@ -1,7 +1,11 @@
 from flask import Flask, render_template, request, make_response, jsonify
 from weather import get_current_weather
 from waitress import serve
+from werkzeug.middleware.proxy_fix import ProxyFix
+
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1, x_prefix=1)
+
 
 @app.route('/')
 @app.route('/index')
