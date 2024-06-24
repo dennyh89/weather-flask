@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Get Weather Conditions</h1>
-    <form action="weather">
+    <form action="{{url_for('get_weather')}}">
         <input type="text" name="city" id="city" placeholder="Enter a city" />
         <button type="submit">Submit</button>
     </form>
